@@ -1,0 +1,2459 @@
+[
+    {
+        "id": "c1de63464131d407",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fca7864584828ce2",
+        "type": "mqtt-broker",
+        "name": "HiveMq connection",
+        "broker": "a81bee6dedc54baabe4f5e3e1a61bc6e.s1.eu.hivemq.cloud",
+        "port": "8883 ",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "200",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "sensors",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9e525eeee6b2eb8f",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "Times New Roman,Times,serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#548538",
+                "baseFont": "Times New Roman,Times,serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": true
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": true
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": true
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": true
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": true
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": true
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "menu",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "f4a7f0b260ee9891",
+        "type": "mongodb",
+        "hostname": "airqualityfyp.u6l7c.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "retryWrites=true&w=majority&appName=AirQualityFYP",
+        "port": "",
+        "db": "t1",
+        "name": "connectToMongo"
+    },
+    {
+        "id": "b032e0557360ab1a",
+        "type": "ui_tab",
+        "name": "BreathQuality",
+        "icon": "cloud_queue",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ca631992ada7d4d8",
+        "type": "ui_group",
+        "name": "Temperature",
+        "tab": "b032e0557360ab1a",
+        "order": 1,
+        "disp": false,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4fc1f27fdcf1f914",
+        "type": "ui_group",
+        "name": "Humidity",
+        "tab": "b032e0557360ab1a",
+        "order": 2,
+        "disp": false,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c254f0f595dee1b7",
+        "type": "ui_group",
+        "name": "Gas tracking",
+        "tab": "b032e0557360ab1a",
+        "order": 3,
+        "disp": false,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7cf4d10b41062be1",
+        "type": "ui_tab",
+        "name": "Alert",
+        "icon": "notifications_active",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "799eb7e562a82a07",
+        "type": "ui_group",
+        "name": "Enter Email Address",
+        "tab": "7cf4d10b41062be1",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "041df848c4550855",
+        "type": "alexa-remote-account",
+        "name": "Amazon Connection",
+        "authMethod": "proxy",
+        "proxyOwnIp": " 192.168.1.47",
+        "proxyPort": "3000",
+        "cookieFile": "C:\\Users\\989mo\\node-red\\auth\\cookies.txt",
+        "refreshInterval": "3",
+        "alexaServiceHost": "alexa.amazon.co.uk",
+        "amazonPage": "amazon.com",
+        "acceptLanguage": "en-US",
+        "userAgent": "",
+        "useWsMqtt": "on",
+        "autoInit": "on"
+    },
+    {
+        "id": "e92da217ed04a4b8",
+        "type": "ui_group",
+        "name": "Particulate Matter",
+        "tab": "b032e0557360ab1a",
+        "order": 4,
+        "disp": false,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "abf1bf15cd7be502",
+        "type": "ui_group",
+        "name": "Emails",
+        "tab": "7cf4d10b41062be1",
+        "order": 3,
+        "disp": true,
+        "width": "8",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "46f7c7b083fb6f5e",
+        "type": "ui_tab",
+        "name": "Mongodb PM",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "f01ee6f5d384ed29",
+        "type": "ui_group",
+        "name": "Mongodb Gas",
+        "tab": "b032e0557360ab1a",
+        "order": 5,
+        "disp": false,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3b47de2147edc4fe",
+        "type": "ui_group",
+        "name": "Mongodb PM",
+        "tab": "b032e0557360ab1a",
+        "order": 6,
+        "disp": false,
+        "width": "9",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3a4ae494f0059b7f",
+        "type": "ui_spacer",
+        "z": "c1de63464131d407",
+        "name": "spacer",
+        "group": "ca631992ada7d4d8",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "25237cde94e8eef2",
+        "type": "ui_spacer",
+        "z": "c1de63464131d407",
+        "name": "spacer",
+        "group": "4fc1f27fdcf1f914",
+        "order": 2,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "ae20af9c6c321a4e",
+        "type": "ui_spacer",
+        "z": "c1de63464131d407",
+        "name": "spacer",
+        "group": "e92da217ed04a4b8",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "bfd88540bbcd7592",
+        "type": "ui_spacer",
+        "z": "c1de63464131d407",
+        "name": "spacer",
+        "group": "e92da217ed04a4b8",
+        "order": 6,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a4f6af73412de272",
+        "type": "mqtt in",
+        "z": "c1de63464131d407",
+        "name": "",
+        "topic": "sensors",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "fca7864584828ce2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 70,
+        "y": 220,
+        "wires": [
+            [
+                "3daa9836b66e7c19",
+                "7b6507a14f2c6769"
+            ]
+        ]
+    },
+    {
+        "id": "3daa9836b66e7c19",
+        "type": "debug",
+        "z": "c1de63464131d407",
+        "d": true,
+        "name": "debug sensor data",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "f3a76e012e7afdf3",
+        "type": "mongodb out",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "AirQualityFYP",
+        "collection": "AirQualityData",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 500,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e7db6cce834d7498",
+        "type": "json",
+        "z": "c1de63464131d407",
+        "name": "convert to json",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "f3a76e012e7afdf3",
+                "a359e8dc6985d2cd",
+                "689055e33fc3e83e",
+                "c458f39ed69a193e",
+                "ee0b8157b66e716e",
+                "41907f6b821903f3",
+                "64fb837fcef8b6f7",
+                "127eeea9aa5d09e5",
+                "fa99d49e0e5690ad",
+                "4ed5a7c211d356d0",
+                "3ac841667c701248",
+                "d7ee5d69b5d434b7",
+                "a94d6f88432b76be",
+                "5bf13efa91f7ad79",
+                "54ac95f6fe6e8072",
+                "b35f5e3d00c388da"
+            ]
+        ]
+    },
+    {
+        "id": "7b6507a14f2c6769",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "add date",
+        "func": "msg.payload.timestamp = new Date().toISOString();\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "e7db6cce834d7498"
+            ]
+        ]
+    },
+    {
+        "id": "d1daa17cdfe0083d",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "GetData",
+        "collection": "AirQualityData",
+        "operation": "find",
+        "x": 500,
+        "y": 960,
+        "wires": [
+            [
+                "6d7525066a2e04b9"
+            ]
+        ]
+    },
+    {
+        "id": "25a0935af4bbf1b3",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "get Query",
+        "func": "// Retrieve the number of hours\nlet hours = parseInt(msg.payload); // Ensure it's a number\n\n// Validate hours \nif (isNaN(hours) || hours <= 0) {\n    node.error(\"Invalid hours value selected\");\n    return null;\n}\n\n// Calculate the start and end time for the query\nlet now = new Date(); // Current time\nlet startTime = new Date(now.getTime() - hours * 60 * 60 * 1000);\n\n// Log the calculated times for debugging\nnode.warn(`Calculated start time: ${startTime}`);\nnode.warn(`Calculated end time (current): ${now}`);\n\n// Construct the MongoDB query\nmsg.query = {\n    timestamp: {\n        '$gte': startTime.toISOString(), \n        '$lt': now.toISOString()         \n    }\n};\n\n// Return the updated message object\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 960,
+        "wires": [
+            [
+                "d1daa17cdfe0083d"
+            ]
+        ]
+    },
+    {
+        "id": "f32721ff71d4a259",
+        "type": "debug",
+        "z": "c1de63464131d407",
+        "d": true,
+        "name": "debug Mongo data",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "6d7525066a2e04b9",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Get DATA",
+        "func": "// Validate msg.payload to ensure it's an array\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Invalid data format: msg.payload is not an array\");\n    return null;\n}\n\n// Define the series names for the chart\nconst series = [\n    \"CO2\",\n    \"CO\",\n    \"VOC\"\n];\n\n// Map the MongoDB data to the required format for the chart\nconst data = [\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.CO2 ?? null                   // CO2\n    })),\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.CO ?? null                    // CO\n    })),\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.VOC ?? null     \n    }))\n];\n\n// Filter out empty series \nconst filteredData = data.map(seriesData => seriesData.filter(point => point.y !== null));\n\n// Construct the chart payload\nmsg.payload = [\n    {\n        series: series,     // Names of the series \n        data: filteredData, // Data points for each series\n        labels: [\"Timestamp\"] // Label for the X-axis\n    }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 960,
+        "wires": [
+            [
+                "be540c877acba245"
+            ]
+        ]
+    },
+    {
+        "id": "50ea5d4c1c30d3f6",
+        "type": "ui_chart",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "ca631992ada7d4d8",
+        "order": 5,
+        "width": 9,
+        "height": 5,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "bezier",
+        "nodata": "temp",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "1",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#2bc9e9",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#db0000",
+            "#ff9896",
+            "#9467bd",
+            "#8827d3"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 750,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a359e8dc6985d2cd",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "SEN54 Temperature",
+        "func": "// Extract the temperature value\nmsg.topic = \"SEN54 Temperature\"\nmsg.payload = msg.payload.SEN54_Temperature;\n\n// Return the modified message\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 420,
+        "wires": [
+            [
+                "50ea5d4c1c30d3f6",
+                "c4536a4da4f284a9",
+                "c6dc36e527330d0d"
+            ]
+        ]
+    },
+    {
+        "id": "689055e33fc3e83e",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "SEN54 Humidity",
+        "func": "// Extract the Humidity value\nmsg.topic = \"SEN54 Humidity\"\nmsg.payload = msg.payload.SEN54_Humidity;\n\n// Return the modified message\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 300,
+        "wires": [
+            [
+                "bf3ffee1a57573fd",
+                "545a72f087757017",
+                "f391661c7e873c60"
+            ]
+        ]
+    },
+    {
+        "id": "bf3ffee1a57573fd",
+        "type": "ui_chart",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "4fc1f27fdcf1f914",
+        "order": 5,
+        "width": 9,
+        "height": 5,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#8db2e2",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#8317e8",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c458f39ed69a193e",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "CO2",
+        "func": "\nmsg.payload = msg.payload.CO2;       \nmsg.topic=\"CO2\"\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "c21c506363aeca37",
+                "594c4939e75a017f",
+                "3dd6173d6bbbab0b"
+            ]
+        ]
+    },
+    {
+        "id": "c21c506363aeca37",
+        "type": "ui_chart",
+        "z": "c1de63464131d407",
+        "name": "Gas",
+        "group": "c254f0f595dee1b7",
+        "order": 7,
+        "width": 9,
+        "height": 6,
+        "label": "Air components( ppm )",
+        "chartType": "pie",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": "0",
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": true,
+        "className": "",
+        "x": 730,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee0b8157b66e716e",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "CO",
+        "func": "msg.payload = msg.payload.CO;\nmsg.topic = \"CO\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 220,
+        "wires": [
+            [
+                "c21c506363aeca37",
+                "6b46ea61175e15ec",
+                "690045df5c8ecbd8"
+            ]
+        ]
+    },
+    {
+        "id": "c4536a4da4f284a9",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "ca631992ada7d4d8",
+        "order": 3,
+        "width": 4,
+        "height": 1,
+        "name": "SEN54",
+        "label": "SEN54",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Times New Roman,Times,serif",
+        "fontSize": 16,
+        "color": "#ededed",
+        "x": 740,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "545a72f087757017",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "4fc1f27fdcf1f914",
+        "order": 1,
+        "width": 4,
+        "height": 1,
+        "name": "SEN54 humidity",
+        "label": "SEN54",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 760,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6b46ea61175e15ec",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "c254f0f595dee1b7",
+        "order": 1,
+        "width": 3,
+        "height": 1,
+        "name": "CO",
+        "label": "CO",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "594c4939e75a017f",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "c254f0f595dee1b7",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "name": "CO2",
+        "label": "CO2",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "be540c877acba245",
+        "type": "ui_chart",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "f01ee6f5d384ed29",
+        "order": 1,
+        "width": 9,
+        "height": 9,
+        "label": "Historical Gases",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "no data aval",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 960,
+        "wires": [
+            [
+                "f32721ff71d4a259"
+            ]
+        ]
+    },
+    {
+        "id": "ebc3698ccee19ed1",
+        "type": "ui_button",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "799eb7e562a82a07",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Submit",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-submit",
+        "payload": "[]",
+        "payloadType": "json",
+        "topic": "",
+        "topicType": "str",
+        "x": 180,
+        "y": 1140,
+        "wires": [
+            [
+                "e1f461fb9443c41a"
+            ]
+        ]
+    },
+    {
+        "id": "e1f461fb9443c41a",
+        "type": "ui_text_input",
+        "z": "c1de63464131d407",
+        "name": "enter Email",
+        "label": "Enter Email Address",
+        "tooltip": "Enter Email to Receive Alerts ",
+        "group": "799eb7e562a82a07",
+        "order": 1,
+        "width": 8,
+        "height": 2,
+        "passthru": false,
+        "mode": "email",
+        "delay": "0",
+        "topic": "payload",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 390,
+        "y": 1140,
+        "wires": [
+            [
+                "1006d5889b2a29c6"
+            ]
+        ]
+    },
+    {
+        "id": "3ee363d95139b0dc",
+        "type": "mongodb out",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "AirQualityFYP",
+        "collection": "User Emails",
+        "payonly": true,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 840,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "1006d5889b2a29c6",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "prepare the email",
+        "func": "// Validate email using a simple regex\nconst email = msg.payload;\nconst emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n\nif (emailRegex.test(email)) {\n    msg.payload = {\n        email: email,\n        timestamp: new Date()\n    };\n    return msg; // Pass the message to the next node\n} else {\n    node.warn(\"Invalid email address\");\n    return null; // Stop the flow if the email is invalid\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 1140,
+        "wires": [
+            [
+                "3ee363d95139b0dc",
+                "a43cd2c176850480"
+            ]
+        ]
+    },
+    {
+        "id": "414d9d9af9cacc89",
+        "type": "mongodb out",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "AirQualityFYP",
+        "collection": "User Emails",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "delete",
+        "x": 1100,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "e6da19144cbbeccb",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "Get Emails",
+        "collection": "User Emails",
+        "operation": "find",
+        "x": 890,
+        "y": 740,
+        "wires": [
+            [
+                "845b9a1bb5ef75f5"
+            ]
+        ]
+    },
+    {
+        "id": "41907f6b821903f3",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Check VOC levels",
+        "func": "// Define a threshold\nvar threshold_In_Minuts = 30;\nvar now = new Date().getTime();\n\n// Retrieve the timestamp of the last VOC alert\nvar lastVOCAlertTime = flow.get(\"lastVOCAlertTime\") || 0;\n\n// Check VOC level\nif (msg.payload.VOC > 500) {\n    // Only send the alert if enough time has passed since the last one\n    if (now - lastVOCAlertTime > threshold_In_Minuts * 60000) {\n        flow.set(\"lastVOCAlertTime\", now);\n        return msg; // Pass the message if the VOC is high and threshold is met\n    } else {\n        return null; // Skip sending duplicate email\n    }\n} else {\n    flow.set(\"lastAlertTime\", 0);\n    return null; // Ignore if VOC is below the threshold\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 740,
+        "wires": [
+            [
+                "573a3b875b5558f7"
+            ]
+        ]
+    },
+    {
+        "id": "845b9a1bb5ef75f5",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Email structure",
+        "func": "// Create an array to hold the email addresses\nvar emails = [];\n\n// Check if msg.payload is an array\nif (Array.isArray(msg.payload)) {\n    for (var i = 0; i < msg.payload.length; i++) {\n        if (msg.payload[i].email) {\n            emails.push(msg.payload[i].email);\n        }\n    }\n}\n\n// Join the emails into a comma-separated string\nmsg.to = emails.join(',');\n\n// Build a formatted HTML email message for VOC Level Alert\nmsg.payload = `\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>VOC Level Alert</title>\n    <style>\n      body {\n        font-family: 'Arial', sans-serif;\n        background-color: #f2f2f2;\n        margin: 0;\n        padding: 20px;\n      }\n      .container {\n        max-width: 600px;\n        margin: 0 auto;\n        background-color: #ffffff;\n        padding: 20px;\n        border-radius: 8px;\n        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n      }\n      h1 {\n        color: #d9534f;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n        color: #333333;\n      }\n      .footer {\n        font-size: 12px;\n        color: #888888;\n        text-align: center;\n        margin-top: 20px;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h1>VOC Level Alert</h1>\n      <p>Dear,</p>\n      <p>This is an automated alert indicating that the VOC (Volatile Organic Compounds) level has exceeded safe thresholds. Please investigate the situation immediately and take the necessary actions to mitigate any risks.</p>\n      <p>Thank you,<br/><strong>BreathQuality Alert System</strong></p>\n      <div class=\"footer\">\n        This is a system-generated message. Please do not reply.\n      </div>\n    </div>\n  </body>\n</html>\n`;\n\nmsg.topic = \"VOC Level Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 740,
+        "wires": [
+            [
+                "d8fe4e3d1dbaf701",
+                "45c778efa68eb48b"
+            ]
+        ]
+    },
+    {
+        "id": "8552cce0a7225ae3",
+        "type": "ui_button",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "f01ee6f5d384ed29",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-refresh",
+        "payload": "24",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 160,
+        "y": 960,
+        "wires": [
+            [
+                "25a0935af4bbf1b3"
+            ]
+        ]
+    },
+    {
+        "id": "281b46d8df861dd6",
+        "type": "ui_chart",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "e92da217ed04a4b8",
+        "order": 7,
+        "width": 9,
+        "height": 8,
+        "label": "Particulate Matter ( μg/m³ )",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#882f93",
+            "#3da7bd",
+            "#624d93",
+            "#2d7b2d",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#8317e8",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 800,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f1040a88d651cd8",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "e92da217ed04a4b8",
+        "order": 5,
+        "width": 2,
+        "height": 2,
+        "name": "",
+        "label": "PM1.0",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "64fb837fcef8b6f7",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "PM1.0",
+        "func": "msg.payload = msg.payload.PM1_0;\nmsg.topic = \"PM 1.0\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "2f1040a88d651cd8",
+                "281b46d8df861dd6"
+            ]
+        ]
+    },
+    {
+        "id": "127eeea9aa5d09e5",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "PM2.5",
+        "func": "msg.payload = msg.payload.PM2_5;\nmsg.topic = \"PM 2.5\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 560,
+        "wires": [
+            [
+                "281b46d8df861dd6",
+                "377deaf39b252d74"
+            ]
+        ]
+    },
+    {
+        "id": "fa99d49e0e5690ad",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "PM4.0",
+        "func": "msg.payload = msg.payload.PM4_0;\nmsg.topic = \"PM 4.0\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 600,
+        "wires": [
+            [
+                "281b46d8df861dd6",
+                "4c7a45881eb7bb8d"
+            ]
+        ]
+    },
+    {
+        "id": "4ed5a7c211d356d0",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "PM10",
+        "func": "msg.payload = msg.payload.PM10;\nmsg.topic = \"PM 10\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 640,
+        "wires": [
+            [
+                "281b46d8df861dd6",
+                "6382500eaf3b4f23"
+            ]
+        ]
+    },
+    {
+        "id": "377deaf39b252d74",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "e92da217ed04a4b8",
+        "order": 4,
+        "width": 2,
+        "height": 2,
+        "name": "",
+        "label": "PM2.5",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "4c7a45881eb7bb8d",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "e92da217ed04a4b8",
+        "order": 2,
+        "width": 2,
+        "height": 2,
+        "name": "",
+        "label": "PM4.0",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "6382500eaf3b4f23",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "e92da217ed04a4b8",
+        "order": 1,
+        "width": 2,
+        "height": 2,
+        "name": "",
+        "label": "PM10",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "3ac841667c701248",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "VOC",
+        "func": "msg.payload = msg.payload.VOC;\nmsg.topic = \"VOC\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "2b2fc29ad06f1a63",
+                "c21c506363aeca37",
+                "58fc24cd8c26d77b"
+            ]
+        ]
+    },
+    {
+        "id": "2b2fc29ad06f1a63",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "c254f0f595dee1b7",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "name": "VOC",
+        "label": "VOC",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 730,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "d7ee5d69b5d434b7",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "DHT22 Temperature",
+        "func": "// Extract the temperature value\nmsg.topic = \"DHT22 Temperature\"\nmsg.payload = msg.payload.DHT22_Temperature;\n\n// Return the modified message\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 380,
+        "wires": [
+            [
+                "50ea5d4c1c30d3f6",
+                "3195011c756e8cec"
+            ]
+        ]
+    },
+    {
+        "id": "3195011c756e8cec",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "ca631992ada7d4d8",
+        "order": 1,
+        "width": 4,
+        "height": 1,
+        "name": "DHT22",
+        "label": "DHT22",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "Times New Roman,Times,serif",
+        "fontSize": 16,
+        "color": "#ededed",
+        "x": 740,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a94d6f88432b76be",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "DHT22 Humidity",
+        "func": "// Extract the Humidity value\nmsg.topic = \"DHT22 Humidity\"\nmsg.payload = msg.payload.DHT22_Humidity;\n\n// Return the modified message\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 340,
+        "wires": [
+            [
+                "5cbb76798d1de709",
+                "bf3ffee1a57573fd"
+            ]
+        ]
+    },
+    {
+        "id": "5cbb76798d1de709",
+        "type": "ui_text",
+        "z": "c1de63464131d407",
+        "group": "4fc1f27fdcf1f914",
+        "order": 3,
+        "width": 4,
+        "height": 1,
+        "name": "DHT humidity",
+        "label": "DHT22",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 760,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5bf13efa91f7ad79",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "mold growth check",
+        "func": "// threshold to send on email one email every 30 minuts\nvar threshold_In_Minuts = 30;\nvar now = new Date().getTime();\nvar lastAlertTime = flow.get(\"lastAlertTime\") || 0;\n\n// Check the sensor condition\nif (msg.payload.SEN54_Humidity > 70 && msg.payload.SEN54_Temperature > 24) {\n    // If enough time passed since the last alert, send the email\n    if (now - lastAlertTime > threshold_In_Minuts * 60000) {\n        flow.set(\"lastAlertTime\", now);\n        return msg; // Proceed to send the email\n    } else {\n        // Skip sending duplicate email within threshold period\n        return null;\n    }\n} else {\n    flow.set(\"lastAlertTime\", 0);\n    return null;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 780,
+        "wires": [
+            [
+                "4860d4688563e6d6"
+            ]
+        ]
+    },
+    {
+        "id": "d9b1a7d2b2cc7325",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "Get Emails",
+        "collection": "User Emails",
+        "operation": "find",
+        "x": 890,
+        "y": 780,
+        "wires": [
+            [
+                "cce942da4fc86561"
+            ]
+        ]
+    },
+    {
+        "id": "cce942da4fc86561",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Email structure",
+        "func": "// Create an array to hold the email addresses\nvar emails = [];\n\n// Check if msg.payload is an array\nif (Array.isArray(msg.payload)) {\n    for (var i = 0; i < msg.payload.length; i++) {\n        if (msg.payload[i].email) {\n            emails.push(msg.payload[i].email);\n        }\n    }\n}\n\n// Join the emails into a comma-separated string\nmsg.to = emails.join(',');\n\n// Build a formatted HTML email message\nmsg.payload = `\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Mold Formation Alert</title>\n    <style>\n      body {\n        font-family: 'Arial', sans-serif;\n        background-color: #f2f2f2;\n        margin: 0;\n        padding: 20px;\n      }\n      .container {\n        max-width: 600px;\n        margin: 0 auto;\n        background-color: #ffffff;\n        padding: 20px;\n        border-radius: 8px;\n        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n      }\n      h1 {\n        color: #d9534f;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n        color: #333333;\n      }\n      .footer {\n        font-size: 12px;\n        color: #888888;\n        text-align: center;\n        margin-top: 20px;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h1>Mold Formation Alarm</h1>\n      <p>Dear,</p>\n      <p>This is an automated alert indicating that conditions for mold formation have been detected. Please review the situation immediately and take the necessary actions.</p>\n      <p>Thank you,<br/><strong>BreathQuality Alert System</strong></p>\n      <div class=\"footer\">\n        This is a system-generated message. Please do not reply :)\n      </div>\n    </div>\n  </body>\n</html>\n`;\n\nmsg.topic = \"Mold Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 780,
+        "wires": [
+            [
+                "d8fe4e3d1dbaf701",
+                "fb3ab4c9600629e0"
+            ]
+        ]
+    },
+    {
+        "id": "61e15a1aab3a5f7a",
+        "type": "inject",
+        "z": "c1de63464131d407",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 840,
+        "wires": [
+            [
+                "af7787a83f8258ee"
+            ]
+        ]
+    },
+    {
+        "id": "d8fe4e3d1dbaf701",
+        "type": "e-mail",
+        "z": "c1de63464131d407",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": false,
+        "name": "",
+        "dname": "send",
+        "x": 1290,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "f391661c7e873c60",
+        "type": "ui_gauge",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "4fc1f27fdcf1f914",
+        "order": 4,
+        "width": 9,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 940,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c6dc36e527330d0d",
+        "type": "ui_gauge",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "ca631992ada7d4d8",
+        "order": 4,
+        "width": 9,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#2f6fee",
+            "#eed953",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "58fc24cd8c26d77b",
+        "type": "ui_gauge",
+        "z": "c1de63464131d407",
+        "name": "VOC",
+        "group": "c254f0f595dee1b7",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "500",
+        "colors": [
+            "#229122",
+            "#c3c322",
+            "#af3131"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 910,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "3dd6173d6bbbab0b",
+        "type": "ui_gauge",
+        "z": "c1de63464131d407",
+        "name": "CO2 gauge",
+        "group": "c254f0f595dee1b7",
+        "order": 5,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#229122",
+            "#c3c322",
+            "#af3131"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 930,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "690045df5c8ecbd8",
+        "type": "ui_gauge",
+        "z": "c1de63464131d407",
+        "name": "CO gauge",
+        "group": "c254f0f595dee1b7",
+        "order": 4,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "12",
+        "colors": [
+            "#229122",
+            "#c3c322",
+            "#af3131"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 930,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "af7787a83f8258ee",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "test",
+        "func": "msg.payload = {\n    SEN54_Humidity: 80,\n    SEN54_Temperature: 26,\n    VOC: 700\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 820,
+        "wires": [
+            [
+                "5bf13efa91f7ad79"
+            ]
+        ]
+    },
+    {
+        "id": "4860d4688563e6d6",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 700,
+        "y": 780,
+        "wires": [
+            [
+                "d9b1a7d2b2cc7325"
+            ]
+        ]
+    },
+    {
+        "id": "573a3b875b5558f7",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 720,
+        "y": 740,
+        "wires": [
+            [
+                "e6da19144cbbeccb"
+            ]
+        ]
+    },
+    {
+        "id": "988ec8aec3b0e63c",
+        "type": "ui_toast",
+        "z": "c1de63464131d407",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "VOC (Volatile Organic Compounds) level has exceeded safe thresholds",
+        "name": "VOC notification",
+        "x": 1540,
+        "y": 680,
+        "wires": [
+            []
+        ],
+        "info": "VOC (Volatile Organic Compounds) level has exceeded safe thresholds"
+    },
+    {
+        "id": "9278a1a11783f04f",
+        "type": "ui_toast",
+        "z": "c1de63464131d407",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "mold formation have been detected",
+        "name": "mold notification",
+        "x": 1540,
+        "y": 800,
+        "wires": [
+            []
+        ],
+        "info": "VOC (Volatile Organic Compounds) level has exceeded safe thresholds"
+    },
+    {
+        "id": "45c778efa68eb48b",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1360,
+        "y": 680,
+        "wires": [
+            [
+                "988ec8aec3b0e63c"
+            ]
+        ]
+    },
+    {
+        "id": "fb3ab4c9600629e0",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1360,
+        "y": 800,
+        "wires": [
+            [
+                "9278a1a11783f04f"
+            ]
+        ]
+    },
+    {
+        "id": "1a85bf322bbea901",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "Get Emails",
+        "collection": "User Emails",
+        "operation": "find",
+        "x": 390,
+        "y": 1240,
+        "wires": [
+            [
+                "471db37682a73d42"
+            ]
+        ]
+    },
+    {
+        "id": "c8736168ef09f99c",
+        "type": "inject",
+        "z": "c1de63464131d407",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 1240,
+        "wires": [
+            [
+                "1a85bf322bbea901"
+            ]
+        ]
+    },
+    {
+        "id": "471db37682a73d42",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "format emails",
+        "func": "msg.payload = msg.payload.map(item => ({\n    email: item.email\n}));\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 1240,
+        "wires": [
+            [
+                "8fdf24032bcaac6a"
+            ]
+        ]
+    },
+    {
+        "id": "8fdf24032bcaac6a",
+        "type": "ui_template",
+        "z": "c1de63464131d407",
+        "group": "abf1bf15cd7be502",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div class=\"email-container\">\n    <h3>Registered Email Addresses</h3>\n    <table class=\"email-table\">\n        <thead>\n            <tr>\n                <th>Email Address</th>\n                <th>Action</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr ng-repeat=\"row in msg.payload\">\n                <td>{{row.email}}</td>\n                <td>\n                    <button class=\"delete-btn\" ng-click=\"send({payload: {email: row.email, action: 'delete'}})\">\n                        Remove\n                    </button>\n                </td>\n            </tr>\n        </tbody>\n    </table>\n</div>\n\n<style>\n    .email-container {\n        background: #1e1e1e;\n        padding: 15px;\n        border-radius: 10px;\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n    }\n\n    h3 {\n        color: #fff;\n        text-align: center;\n        margin-bottom: 10px;\n    }\n\n    .email-table {\n        width: 100%;\n        border-collapse: collapse;\n        margin-top: 10px;\n        background: #2c2c2c;\n        border-radius: 8px;\n        overflow: hidden;\n    }\n\n    .email-table th,\n    .email-table td {\n        padding: 12px;\n        text-align: left;\n        color: #fff;\n    }\n\n    .email-table th {\n        background-color: #003f83;\n        color: white;\n    }\n\n    .email-table tr:nth-child(even) {\n        background: #3b3b3b;\n    }\n\n    .email-table tr:hover {\n        background: #444;\n        transition: 0.3s;\n    }\n\n    .delete-btn {\n        background: #D30000;\n        color: white;\n        border: none;\n        padding: 6px 12px;\n        cursor: pointer;\n        border-radius: 5px;\n        font-weight: bold;\n    }\n\n    .delete-btn:hover {\n        background: darkred;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 700,
+        "y": 1240,
+        "wires": [
+            [
+                "6d91c754737ecc0d"
+            ]
+        ]
+    },
+    {
+        "id": "6d91c754737ecc0d",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Delete email fun",
+        "func": "if (msg.payload.action === \"delete\") { \n    msg.payload = {\n        email: msg.payload.email\n    };   \n    return msg;\n}\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1240,
+        "wires": [
+            [
+                "414d9d9af9cacc89",
+                "33458d4dc71b96ea"
+            ]
+        ]
+    },
+    {
+        "id": "33458d4dc71b96ea",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "update dashboard 2",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 520,
+        "y": 1300,
+        "wires": [
+            [
+                "1a85bf322bbea901"
+            ]
+        ]
+    },
+    {
+        "id": "a43cd2c176850480",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "update dashboard 1",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 560,
+        "y": 1200,
+        "wires": [
+            [
+                "1a85bf322bbea901"
+            ]
+        ]
+    },
+    {
+        "id": "c08bc752fe84cd17",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "GetData",
+        "collection": "AirQualityData",
+        "operation": "find",
+        "x": 500,
+        "y": 1060,
+        "wires": [
+            [
+                "45933c52d13965a8"
+            ]
+        ]
+    },
+    {
+        "id": "08bcb5e209a2b5e4",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "get Query",
+        "func": "// Retrieve the number of hours\nlet hours = parseInt(msg.payload); // Ensure it's a number\n\n// Validate hours \nif (isNaN(hours) || hours <= 0) {\n    node.error(\"Invalid hours value selected\");\n    return null;\n}\n\n// Calculate the start and end time for the query\nlet now = new Date(); // Current time\nlet startTime = new Date(now.getTime() - hours * 60 * 60 * 1000);\n\n// Log the calculated times for debugging\nnode.warn(`Calculated start time: ${startTime}`);\nnode.warn(`Calculated end time (current): ${now}`);\n\n// Construct the MongoDB query\nmsg.query = {\n    timestamp: {\n        '$gte': startTime.toISOString(), \n        '$lt': now.toISOString()         \n    }\n};\n\n// Return the updated message object\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1060,
+        "wires": [
+            [
+                "c08bc752fe84cd17"
+            ]
+        ]
+    },
+    {
+        "id": "45933c52d13965a8",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Get DATA",
+        "func": "// Validate msg.payload to ensure it's an array\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Invalid data format: msg.payload is not an array\");\n    return null;\n}\n\n// Define the series names for the chart\nconst series = [\n    \"PM 1.0\",\n    \"PM 2.5\",\n    \"PM 4.0\",\n    \"PM 10\"\n];\n\n// Map the MongoDB data to the required format for the chart\nconst data = [\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.PM1_0 ?? null                   \n    })),\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.PM2_5 ?? null                    \n    })),\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.PM4_0 ?? null     \n    })),\n    msg.payload.map(doc => ({\n        x: new Date(doc.timestamp).getTime(),\n        y: doc.PM10 ?? null     \n    }))\n];\n\n// Filter out empty series \nconst filteredData = data.map(seriesData => seriesData.filter(point => point.y !== null));\n\n// Construct the chart payload\nmsg.payload = [\n    {\n        series: series,     // Names of the series \n        data: filteredData, // Data points for each series\n        labels: [\"Timestamp\"] // Label for the X-axis\n    }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 1060,
+        "wires": [
+            [
+                "5222f3a95fa2f803"
+            ]
+        ]
+    },
+    {
+        "id": "5222f3a95fa2f803",
+        "type": "ui_chart",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "3b47de2147edc4fe",
+        "order": 1,
+        "width": 9,
+        "height": 9,
+        "label": "Historical PM",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "no data aval",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#7056b8",
+            "#66a4f5",
+            "#8ca25d",
+            "#cdc13c",
+            "#98df8a",
+            "#d62728",
+            "#ed5250",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 850,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "471f164b479cdcc0",
+        "type": "ui_button",
+        "z": "c1de63464131d407",
+        "name": "",
+        "group": "3b47de2147edc4fe",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Refresh",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa-refresh",
+        "payload": "24",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 160,
+        "y": 1060,
+        "wires": [
+            [
+                "08bcb5e209a2b5e4"
+            ]
+        ]
+    },
+    {
+        "id": "35382b67ecd3241c",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "Get Emails",
+        "collection": "User Emails",
+        "operation": "find",
+        "x": 890,
+        "y": 700,
+        "wires": [
+            [
+                "415d5231d816f409"
+            ]
+        ]
+    },
+    {
+        "id": "54ac95f6fe6e8072",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Check CO levels",
+        "func": "// Define a threshold\nvar threshold_In_Minuts = 30;\nvar now = new Date().getTime();\n\n// Retrieve the timestamp of the last VOC alert\nvar lastVOCAlertTime = flow.get(\"lastVOCAlertTime\") || 0;\n\n// Check VOC level\nif (msg.payload.CO > 16) {\n    // Only send the alert if enough time has passed since the last one\n    if (now - lastVOCAlertTime > threshold_In_Minuts * 60000) {\n        flow.set(\"lastVOCAlertTime\", now);\n        return msg; // Pass the message if the VOC is high and threshold is met\n    } else {\n        return null; // Skip sending duplicate email\n    }\n} else {\n    flow.set(\"lastAlertTime\", 0);\n    return null; // Ignore if VOC is below the threshold\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 700,
+        "wires": [
+            [
+                "f415fdc3409c534e"
+            ]
+        ]
+    },
+    {
+        "id": "415d5231d816f409",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Email structure",
+        "func": "// Create an array to hold the email addresses\nvar emails = [];\n\n// Check if msg.payload is an array\nif (Array.isArray(msg.payload)) {\n    for (var i = 0; i < msg.payload.length; i++) {\n        if (msg.payload[i].email) {\n            emails.push(msg.payload[i].email);\n        }\n    }\n}\n\n// Join the emails into a comma-separated string\nmsg.to = emails.join(',');\n\n// Build a formatted HTML email message for CO Level Alert\nmsg.payload = `\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>CO Level Alert</title>\n    <style>\n      body {\n        font-family: 'Arial', sans-serif;\n        background-color: #f2f2f2;\n        margin: 0;\n        padding: 20px;\n      }\n      .container {\n        max-width: 600px;\n        margin: 0 auto;\n        background-color: #ffffff;\n        padding: 20px;\n        border-radius: 8px;\n        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n      }\n      h1 {\n        color: #d9534f;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n        color: #333333;\n      }\n      .footer {\n        font-size: 12px;\n        color: #888888;\n        text-align: center;\n        margin-top: 20px;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h1>CO Level Alert</h1>\n      <p>Dear,</p>\n      <p>This is an automated alert indicating that the carbon monoxide (CO) level has exceeded safe thresholds. Please investigate the situation immediately and take the necessary actions to mitigate any risks.</p>\n      <p>Thank you,<br/><strong>BreathQuality Alert System</strong></p>\n      <div class=\"footer\">\n        This is a system-generated message. Please do not reply.\n      </div>\n    </div>\n  </body>\n</html>\n`;\n\nmsg.topic = \"CO Level Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 700,
+        "wires": [
+            [
+                "91e4f7e765506a25",
+                "d8fe4e3d1dbaf701"
+            ]
+        ]
+    },
+    {
+        "id": "f415fdc3409c534e",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 700,
+        "y": 700,
+        "wires": [
+            [
+                "35382b67ecd3241c"
+            ]
+        ]
+    },
+    {
+        "id": "4d1cc14e74ca6aba",
+        "type": "ui_toast",
+        "z": "c1de63464131d407",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "carbon monoxide (CO) level has exceeded safe thresholds",
+        "name": "CO notification",
+        "x": 1540,
+        "y": 640,
+        "wires": [
+            []
+        ],
+        "info": "VOC (Volatile Organic Compounds) level has exceeded safe thresholds"
+    },
+    {
+        "id": "91e4f7e765506a25",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1360,
+        "y": 640,
+        "wires": [
+            [
+                "4d1cc14e74ca6aba"
+            ]
+        ]
+    },
+    {
+        "id": "2dd4b5caad84c9e3",
+        "type": "inject",
+        "z": "c1de63464131d407",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 700,
+        "wires": [
+            [
+                "fdd94d4bdd75b818"
+            ]
+        ]
+    },
+    {
+        "id": "fdd94d4bdd75b818",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "test",
+        "func": "msg.payload = {\n    CO: 18\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 760,
+        "wires": [
+            [
+                "54ac95f6fe6e8072"
+            ]
+        ]
+    },
+    {
+        "id": "f36db6deab55ecba",
+        "type": "mongodb in",
+        "z": "c1de63464131d407",
+        "mongodb": "f4a7f0b260ee9891",
+        "name": "Get Emails",
+        "collection": "User Emails",
+        "operation": "find",
+        "x": 890,
+        "y": 840,
+        "wires": [
+            [
+                "b49aa42868bf24b0"
+            ]
+        ]
+    },
+    {
+        "id": "b35f5e3d00c388da",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Check PM levels",
+        "func": "// Define a threshold\nvar threshold_In_Minuts = 30;\nvar now = new Date().getTime();\n\n// Retrieve the timestamp of the last PM alert\nvar lastAlertTime = flow.get(\"lastAlertTime\") || 0;\n\n// Check PM level\nif (msg.payload.PM1_0 > 2000) {\n    // Only send the alert if enough time has passed since the last one\n    if (now - lastAlertTime > threshold_In_Minuts * 60000) {\n        flow.set(\"lastAlertTime\", now);\n        return msg; // Pass the message if the PM1 is high and threshold is met\n    } else {\n        return null; // Skip sending duplicate email\n    }\n} else {\n    flow.set(\"lastAlertTime\", 0);\n    return null; // Ignore if PM is below the threshold\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 840,
+        "wires": [
+            [
+                "9df782f2a399d87e"
+            ]
+        ]
+    },
+    {
+        "id": "b49aa42868bf24b0",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "Email structure",
+        "func": "// Create an array to hold the email addresses\nvar emails = [];\n\n// Check if msg.payload is an array\nif (Array.isArray(msg.payload)) {\n    for (var i = 0; i < msg.payload.length; i++) {\n        if (msg.payload[i].email) {\n            emails.push(msg.payload[i].email);\n        }\n    }\n}\n\n// Join the emails into a comma-separated string\nmsg.to = emails.join(',');\n\n// Build a formatted HTML email message for PM Level Alert\nmsg.payload = `\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>PM Level Alert</title>\n    <style>\n      body {\n        font-family: 'Arial', sans-serif;\n        background-color: #f2f2f2;\n        margin: 0;\n        padding: 20px;\n      }\n      .container {\n        max-width: 600px;\n        margin: 0 auto;\n        background-color: #ffffff;\n        padding: 20px;\n        border-radius: 8px;\n        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n      }\n      h1 {\n        color: #d9534f;\n      }\n      p {\n        font-size: 16px;\n        line-height: 1.5;\n        color: #333333;\n      }\n      .footer {\n        font-size: 12px;\n        color: #888888;\n        text-align: center;\n        margin-top: 20px;\n      }\n    </style>\n  </head>\n  <body>\n    <div class=\"container\">\n      <h1>PM Level Alert</h1>\n      <p>Dear,</p>\n      <p>This is an automated alert indicating that the particulate matter (PM) level has exceeded safe thresholds. Please investigate the situation immediately and take the necessary actions to mitigate any risks.</p>\n      <p>Thank you,<br/><strong>BreathQuality Alert System</strong></p>\n      <div class=\"footer\">\n        This is a system-generated message. Please do not reply.\n      </div>\n    </div>\n  </body>\n</html>\n`;\n\nmsg.topic = \"PM Level Alert\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 840,
+        "wires": [
+            [
+                "a64958a55631ac4d",
+                "d8fe4e3d1dbaf701"
+            ]
+        ]
+    },
+    {
+        "id": "9df782f2a399d87e",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 700,
+        "y": 840,
+        "wires": [
+            [
+                "f36db6deab55ecba"
+            ]
+        ]
+    },
+    {
+        "id": "1bbc1e8ef8b85991",
+        "type": "ui_toast",
+        "z": "c1de63464131d407",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "particulate matter (PM) level has exceeded safe thresholds",
+        "name": "PM notification",
+        "x": 1540,
+        "y": 840,
+        "wires": [
+            []
+        ],
+        "info": "VOC (Volatile Organic Compounds) level has exceeded safe thresholds"
+    },
+    {
+        "id": "a64958a55631ac4d",
+        "type": "trigger",
+        "z": "c1de63464131d407",
+        "name": "trigger message",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "250",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1360,
+        "y": 840,
+        "wires": [
+            [
+                "1bbc1e8ef8b85991"
+            ]
+        ]
+    },
+    {
+        "id": "00b41ee3f0c233ad",
+        "type": "inject",
+        "z": "c1de63464131d407",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1180,
+        "y": 900,
+        "wires": [
+            [
+                "a64958a55631ac4d"
+            ]
+        ]
+    },
+    {
+        "id": "20094a6ff838d281",
+        "type": "inject",
+        "z": "c1de63464131d407",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 900,
+        "wires": [
+            [
+                "abf46e78b159ee61"
+            ]
+        ]
+    },
+    {
+        "id": "abf46e78b159ee61",
+        "type": "function",
+        "z": "c1de63464131d407",
+        "name": "test",
+        "func": "msg.payload = {\n    PM1_0: 3000\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 900,
+        "wires": [
+            [
+                "b35f5e3d00c388da"
+            ]
+        ]
+    }
+]

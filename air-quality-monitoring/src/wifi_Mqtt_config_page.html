@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Quality Wi-Fi & HiveMQ Configuration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #121212, #1e1e1e);
+      color: white;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.4);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .input-group {
+      position: relative;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 12px 50px 12px 12px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .input-group input:focus {
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid #32a5b9;
+    }
+    .toggle-btn {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #32a5b9;
+      cursor: pointer;
+      font-size: 14px;
+      outline: none;
+    }
+    .btn {
+      background: #004196;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s ease-in-out;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .btn:hover {
+      background: #32a5b9;
+      transform: scale(1.05);
+    }
+    h2 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Air Quality Monitor</h2>
+    <form action="/save" method="post">
+      <div class="input-group">
+        <label for="ssid">Wi-Fi SSID:</label>
+        <input type="text" id="ssid" name="ssid" value="%SSID%" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Wi-Fi Password:</label>
+        <input type="password" id="password" name="password" value="%PASSWORD%" required>
+        <button type="button" class="toggle-btn" onclick="togglePassword('password', this)">Show</button>
+      </div>
+      <div class="input-group">
+        <label for="mqtt_server">MQTT Server:</label>
+        <input type="text" id="mqtt_server" name="mqtt_server" value="%MQTT%" required>
+      </div>
+      <div class="input-group">
+        <label for="mqtt_port">MQTT Port:</label>
+        <input type="text" id="mqtt_port" name="mqtt_port" value="%MQTTPORT%" required>
+      </div>
+      <div class="input-group">
+        <label for="mqtt_user">MQTT User:</label>
+        <input type="text" id="mqtt_user" name="mqtt_user" value="%MQTTUSER%">
+      </div>
+      <div class="input-group">
+        <label for="mqtt_pass">MQTT Password:</label>
+        <input type="password" id="mqtt_pass" name="mqtt_pass" value="%MQTTPASS%">
+        <button type="button" class="toggle-btn" onclick="togglePassword('mqtt_pass', this)">Show</button>
+      </div>
+      <button class="btn" type="submit">Save Configuration</button>
+    </form>
+  </div>
+  <script>
+    function togglePassword(fieldId, btn) {
+      var input = document.getElementById(fieldId);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "Hide";
+      } else {
+        input.type = "password";
+        btn.textContent = "Show";
+      }
+    }
+  </script>
+</body>
+</html>
